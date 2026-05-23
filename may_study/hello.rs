@@ -15,5 +15,11 @@ fn main(){
 
     let tup=(1i32,15,3.0,true);
 
+    
+    
+    let tuple = (1, "hello", 4.5, true);
+
+    let (a, b, c, d) = tuple;
+    println!("{:?}, {:?}, {:?}, {:?}", a, b, c, d);
 
 }
