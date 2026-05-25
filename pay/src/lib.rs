@@ -39,3 +39,14 @@ impl std::fmt::Display for Amount<EGP>{
         write!(f,"E{}",self.value)
     }
 }
+
+
+
+
+impl<C> std::ops::Add<Self> for Amount<C> { 
+    type Output=Self;
+
+    fn add(self,other:Self)->Self{
+        Amount{value:self.value+other.value,_phantom:PhantomData}
+    }
+}
