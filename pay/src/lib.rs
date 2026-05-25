@@ -7,10 +7,29 @@ pub struct Amount<C>{
     _phantom:PhantomData<C>//size is 0 to avoid the unsused error
 }
 
+
+#[derive(Debug)]
+pub struct USD;
+
+
+#[derive(Debug)]
+pub struct EGP;
+
+
+#[derive(Debug)]
+pub struct GPB;
+
+
 impl<C> Amount<C>{
     pub fn new(value:u64)->Self{
         Amount{value:value,_phantom:PhantomData}
     }
 }
 
+
+impl std::fmt::Display for Amount<USD>{
+    fn fmt(&self,f: &mut std::fmt::Formatter<'_>)->std::fmt::Result{
+        write!(f,"${}",self.value)
+    }
+}
 
