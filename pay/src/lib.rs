@@ -33,3 +33,9 @@ impl std::fmt::Display for Amount<USD>{
     }
 }
 
+
+impl std::fmt::Display for Amount<EGP>{
+    fn fmt(&self,f: &mut std::fmt::Formatter<'_>)->std::fmt::Result{
+        write!(f,"E{}",self.value)
+    }
+}
