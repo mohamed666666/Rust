@@ -8,16 +8,10 @@ pub struct Amount<C>{
 }
 
 
-#[derive(Debug)]
-pub struct USD;
+pub trait Currency{
+    const SYMBOL:&'static str;
 
-
-#[derive(Debug)]
-pub struct EGP;
-
-
-#[derive(Debug)]
-pub struct GPB;
+}
 
 
 impl<C> Amount<C>{
@@ -27,23 +21,19 @@ impl<C> Amount<C>{
 }
 
 
-impl std::fmt::Display for Amount<USD>{
+impl<C> std::fmt::Display for Amount<C> 
+where C:Currency{
     fn fmt(&self,f: &mut std::fmt::Formatter<'_>)->std::fmt::Result{
-        write!(f,"${}",self.value)
-    }
-}
-
-
-impl std::fmt::Display for Amount<EGP>{
-    fn fmt(&self,f: &mut std::fmt::Formatter<'_>)->std::fmt::Result{
-        write!(f,"E{}",self.value)
+        write!(f,"{}{}",C::SYMBOL,self.value)
     }
 }
 
 
 
 
-impl<C> std::ops::Add<Self> for Amount<C> { 
+
+
+impl<C> std::ops::Add<Self> for Amount<C> where C:Currency, { 
     type Output=Self;
 
     fn add(self,other:Self)->Self{
