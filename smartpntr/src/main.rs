@@ -43,6 +43,9 @@ impl Directory{
         }
         println!();
     }
+    fn rm_file(&mut self, filename: &str){
+        self.files.retain(|file|file.name!=filename)
+    }
 }
 
 
@@ -52,9 +55,15 @@ fn main() {
     let mut d=Directory::new("User");
     d.add(Rc::clone(&f));
     d.list();
-
+    let mut d2=Directory::new("Dir2");
+    d2.add(Rc::clone(&f));
+    d2.list();
     let f2 = Rc::new(File::new("Secounfile",10));
- 
+    d2.add(Rc::clone(&f2));
     d.add(Rc::clone(&f2));
+
     d.list();
+    d2.list();
+    d.rm_file("Secounfile");
+    d.list()
 }
