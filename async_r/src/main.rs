@@ -3,6 +3,8 @@ use std::time::Duration;
 
 
 fn main() {
+    let mut t2shutdown=false;
+
     let t1= std::thread::spwan(|| {//spwan dunction return refrance called johnhandle object used as remote controll over the thread
          let listener=TcpListener::bind("0.0.0.0:4000").unwrap();
     println!("Server Start listen on : {:?}",listener);
@@ -13,7 +15,7 @@ fn main() {
     )
 
      std::thread::spwan(|| {//spwan dunction return refrance called johnhandle object used as remote controll over the thread
-         loop{
+         while !t2shutdown{
             println!("Hello from the Secound thread ");
             std::thread::sleep(Duration::from_secs(2));
          }
@@ -23,4 +25,7 @@ fn main() {
     
 
     let stream=t1.join();//wait untill the thread finish and take the returned data 
+    t2shutdown=true;
+    println!("closed all threads ");
+
 }
